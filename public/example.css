@@ -51,7 +51,7 @@
 
 /* When the URL bar is hidden, shrink the margin-top of the toggle icon */
 .url-bar.hidden + .toggle-icon {
-    margin-top: -9vh; /* Adjust this value as needed */
+    margin-top: -40vh; /* Adjust this value as needed */
 }
 
 
