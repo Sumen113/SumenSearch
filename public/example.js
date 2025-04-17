@@ -4,17 +4,25 @@ const urlBar = document.querySelector(".url-bar");
 const iframeWindow = document.getElementById("iframeWindow");
 
 let hasSearched = false;
+let inputVisible = true; // Tracks if the input is visible
 
-function toggleInputVisibility(forceShow = null) {
-    const isHidden = urlBar.classList.contains("hidden");
-    const shouldShow = forceShow !== null ? forceShow : isHidden;
+function showInput() {
+    urlBar.classList.remove("hidden");
+    toggleIcon.classList.add("open");
+    inputVisible = true;
+}
 
-    if (shouldShow) {
-        urlBar.classList.remove("hidden");
-        toggleIcon.classList.add("open");
+function hideInput() {
+    urlBar.classList.add("hidden");
+    toggleIcon.classList.remove("open");
+    inputVisible = false;
+}
+
+function toggleInput() {
+    if (inputVisible) {
+        hideInput();
     } else {
-        urlBar.classList.add("hidden");
-        toggleIcon.classList.remove("open");
+        showInput();
     }
 }
 
@@ -22,30 +30,24 @@ urlInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
 
-        let url = urlInput.value;
-        let searchUrl = "https://www.google.com/search?q=";
+        let url = urlInput.value.trim();
+        const searchUrl = "https://www.google.com/search?q=";
 
         if (!url.includes(".")) {
             url = searchUrl + encodeURIComponent(url);
-        } else {
-            if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                url = "https://" + url;
-            }
+        } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "https://" + url;
         }
 
         iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(url);
 
-        // Only show the arrow after first search
         if (!hasSearched) {
-            toggleIcon.style.display = "block";
+            toggleIcon.style.display = "block"; // Show arrow after first search
             hasSearched = true;
         }
 
-        toggleInputVisibility(false); // Hide input
+        hideInput(); // Hide input after searching
     }
 });
 
-toggleIcon.addEventListener("click", () => {
-    const isHidden = urlBar.classList.contains("hidden");
-    toggleInputVisibility(!isHidden);
-});
+toggleIcon.addEventListener("click", toggleInput);
