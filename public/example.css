@@ -1,7 +1,7 @@
 .iframeWindow {
     position: absolute;
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     border: 0;
     padding: 0;
     margin: 0;
@@ -11,6 +11,7 @@
 }
 
 #urlInput {
+    z-index: 5;
     position: absolute;
     top: 2vh;
     left: 50%;
