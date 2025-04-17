@@ -1,16 +1,17 @@
 const urlInput = document.getElementById("urlInput");
 const toggleIcon = document.querySelector(".toggle-icon");
+const urlBar = document.querySelector(".url-bar");
 const iframeWindow = document.getElementById("iframeWindow");
 
-function toggleInputVisibility(forceState = null) {
-    const isHidden = urlInput.style.display === "none";
-    const shouldShow = forceState !== null ? forceState : isHidden;
+function toggleInputVisibility(forceShow = null) {
+    const isHidden = urlBar.classList.contains("hidden");
+    const shouldShow = forceShow !== null ? forceShow : isHidden;
 
     if (shouldShow) {
-        urlInput.style.display = "block";
+        urlBar.classList.remove("hidden");
         toggleIcon.classList.add("open");
     } else {
-        urlInput.style.display = "none";
+        urlBar.classList.add("hidden");
         toggleIcon.classList.remove("open");
     }
 }
@@ -32,9 +33,7 @@ urlInput.addEventListener("keydown", function (event) {
 
         iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(url);
 
-        // Collapse input after search
-        toggleInputVisibility(false);
-        toggleIcon.style.display = "block";
+        toggleInputVisibility(false); // collapse input
     }
 });
 
