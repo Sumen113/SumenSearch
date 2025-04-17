@@ -74,3 +74,8 @@
     z-index: 6;
     transition: all 0.3s ease;
 }
+
+/* When the input is visible, rotate the arrow up */
+.toggle-icon.open {
+    transform: translateX(-50%) rotate(180deg);
+}
