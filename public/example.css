@@ -21,28 +21,24 @@
     z-index: 10;
 }
 
+/* When URL bar is visible */
+.url-bar:not(.hidden) + .toggle-icon {
+    margin-top: 1em; /* space below the URL bar */
+}
+
+/* When URL bar is hidden */
+.url-bar.hidden + .toggle-icon {
+    margin-top: 0; /* move the arrow back up */
+}
+
 .toggle-icon {
     font-size: 1.5rem;
     color: #fff;
     cursor: pointer;
     transition: transform 0.3s ease, margin 0.3s ease;
     display: none;
-    margin-top: 1em; /* always add spacing from input above */
 }
 
-.toggle-icon.open {
-    transform: rotate(180deg);
-}
-
-
-.url-bar {
-    position: relative;
-    width: 70vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.3s ease, transform 0.3s ease, height 0.3s ease;
-}
 
 .url-bar.hidden {
     opacity: 0;
