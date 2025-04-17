@@ -62,3 +62,15 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     transform: translateX(-50%) scale(1.01);
 }
+
+.toggle-icon {
+    position: absolute;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 6;
+    transition: all 0.3s ease;
+}
