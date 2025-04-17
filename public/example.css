@@ -23,13 +23,14 @@
 
 .toggle-icon {
     border-radius: 1vh;
-    background-color: rgba(32, 29, 29, 0.377);
     font-size: 1.5rem;
     color: #fff;
     cursor: pointer;
     transition: transform 0.3s ease, margin 0.3s ease;
     display: none;
     margin-top: 1em; /* always add spacing from input above */
+    outline: 2px solid black;
+    outline-offset: 2px;
 }
 
 .toggle-icon.open {
@@ -92,17 +93,4 @@
 #urlInput:focus + .search-icon {
     color: #6495ED;
     transform: scale(1.1);
-}
-
-/* iframe */
-.iframeWindow {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    left: 0;
-    bottom: 0;
-    background-color: #fff;
 }
