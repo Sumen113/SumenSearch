@@ -26,14 +26,14 @@
     color: #fff;
     cursor: pointer;
     transition: transform 0.3s ease, margin 0.3s ease;
-    display: none; /* hidden until first search */
-    margin-top: 0;   /* up when input is hidden */
+    display: none;
+    margin-top: 1em; /* always add spacing from input above */
 }
 
 .toggle-icon.open {
     transform: rotate(180deg);
-    margin-top: 1em; /* pushes it down when input is shown */
 }
+
 
 .url-bar {
     position: relative;
