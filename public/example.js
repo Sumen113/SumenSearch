@@ -4,7 +4,7 @@ const urlBar = document.querySelector(".url-bar");
 const iframeWindow = document.getElementById("iframeWindow");
 
 let hasSearched = false;
-let inputVisible = true; // Tracks if the input is visible
+let inputVisible = false;
 
 function showInput() {
     urlBar.classList.remove("hidden");
@@ -19,11 +19,7 @@ function hideInput() {
 }
 
 function toggleInput() {
-    if (inputVisible) {
-        hideInput();
-    } else {
-        showInput();
-    }
+    inputVisible ? hideInput() : showInput();
 }
 
 urlInput.addEventListener("keydown", function (event) {
@@ -42,11 +38,11 @@ urlInput.addEventListener("keydown", function (event) {
         iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(url);
 
         if (!hasSearched) {
-            toggleIcon.style.display = "block"; // Show arrow after first search
+            toggleIcon.style.display = "block"; // show arrow
             hasSearched = true;
         }
 
-        hideInput(); // Hide input after searching
+        hideInput(); // hide after search
     }
 });
 
