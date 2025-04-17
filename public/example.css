@@ -34,7 +34,6 @@
     transform: rotate(180deg);
 }
 
-
 .url-bar {
     position: relative;
     width: 70vw;
@@ -49,6 +48,12 @@
     transform: translateY(-20px);
     pointer-events: none;
 }
+
+/* When the URL bar is hidden, shrink the margin-top of the toggle icon */
+.url-bar.hidden + .toggle-icon {
+    margin-top: 0.5em; /* Adjust this value as needed */
+}
+
 
 /* Input styling */
 #urlInput {
