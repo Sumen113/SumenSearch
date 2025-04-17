@@ -3,6 +3,8 @@ const toggleIcon = document.querySelector(".toggle-icon");
 const urlBar = document.querySelector(".url-bar");
 const iframeWindow = document.getElementById("iframeWindow");
 
+let hasSearched = false;
+
 function toggleInputVisibility(forceShow = null) {
     const isHidden = urlBar.classList.contains("hidden");
     const shouldShow = forceShow !== null ? forceShow : isHidden;
@@ -33,10 +35,17 @@ urlInput.addEventListener("keydown", function (event) {
 
         iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(url);
 
-        toggleInputVisibility(false); // collapse input
+        // Only show the arrow after first search
+        if (!hasSearched) {
+            toggleIcon.style.display = "block";
+            hasSearched = true;
+        }
+
+        toggleInputVisibility(false); // Hide input
     }
 });
 
 toggleIcon.addEventListener("click", () => {
-    toggleInputVisibility();
+    const isHidden = urlBar.classList.contains("hidden");
+    toggleInputVisibility(!isHidden);
 });
