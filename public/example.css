@@ -79,7 +79,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.3s ease, transform 0.3s ease, height 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, height 0.3s ease, box-shadow 0.3s ease-in-out;
+    border-radius: 100vh;
+    transform: scale(1.2);
 }
 
 .url-bar.hidden {
@@ -94,7 +96,6 @@
 }
 
 
-/* Input styling */
 #urlInput {
     flex-grow: 1;
     height: 6vh;
@@ -102,20 +103,23 @@
     border: none;
     border-radius: 100vh;
     outline: none;
-
-    color: #ffffff;
-    background-color: #1e1e24;
+    display: block;
+    background-color: #043a09;
+    border: 2px solid #a7ff9f;
+    color: #fff;
 
     font-size: 1.2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .url-bar:hover {
-    transform: scale(1.05);
+    transform: scale(1.24);
+    box-shadow: 0 0 5px #37db47, 0 0 10px #37db47, 0 0 30px #37db47;
 }
+
 
 .search-icon {
     position: absolute;
@@ -124,6 +128,11 @@
     font-size: 1.2rem;
     pointer-events: none;
     transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#urlInput:hover + .search-icon {
+    color: #aac2ee;
+    transform: scale(1.1);
 }
 
 #urlInput:focus + .search-icon {
