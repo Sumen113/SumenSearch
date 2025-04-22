@@ -35,14 +35,15 @@ urlInput.addEventListener("keydown", function (event) {
 
         // If it's not a full URL, treat it as a search query
         if (!url.includes(".")) {
-            // Encode the search query
-            url = searchUrl + encodeURIComponent(url);
+            // Directly open Ecosia search without proxy
+            window.location.href = searchUrl + encodeURIComponent(url);
+            return;
         } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
             // If it's a URL without protocol, prepend https://
             url = "https://" + url;
         }
 
-        // Log the URL to check the final structure
+        // Log the final URL to check the structure
         console.log("Loading URL:", url);
 
         // Encode the URL for Ultraviolet proxy
@@ -50,19 +51,6 @@ urlInput.addEventListener("keydown", function (event) {
 
         // Set the iframe src with the proxy URL
         iframeWindow.src = __uv$config.prefix + encodedUrl;
-
-        // Add a timeout to check if the iframe is stuck on loading
-        setTimeout(function() {
-            if (iframeWindow.src === __uv$config.prefix + encodedUrl) {
-                console.log("Iframe failed to load, retrying...");
-                iframeWindow.src = __uv$config.prefix + encodedUrl; // Retry to load the page
-            }
-        }, 5000); // Retry after 5 seconds
-
-        // Check for iframe loading success
-        iframeWindow.onload = function() {
-            console.log("Iframe loaded successfully.");
-        };
 
         // Show the toggle icon after the first search
         if (!hasSearched) {
@@ -77,5 +65,3 @@ urlInput.addEventListener("keydown", function (event) {
 
 // Toggle input visibility when the icon is clicked
 toggleIcon.addEventListener("click", toggleInput);
-
-
