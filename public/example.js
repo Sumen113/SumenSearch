@@ -33,28 +33,44 @@ urlInput.addEventListener("keydown", function (event) {
         let url = urlInput.value.trim();
         const searchUrl = "https://www.ecosia.org/search?method=index&q=";
 
-        // If it's not a full URL, treat it as a search query
+        // If it's not a full URL, treat it as a search query.
         if (!url.includes(".")) {
-            // Directly open Ecosia search without proxy
-            window.location.href = searchUrl + encodeURIComponent(url);
-            return;
+            // Encode the search query
+            url = searchUrl + encodeURIComponent(url);
         } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
             // If it's a URL without protocol, prepend https://
             url = "https://" + url;
         }
 
-        // Log the final URL to check the structure
+        // Log the URL being loaded to check if it's correct
         console.log("Loading URL:", url);
 
         // Encode the URL for Ultraviolet proxy
         const encodedUrl = __uv$config.encodeUrl(url);
 
-        // Set the iframe src with the proxy URL
+        // Ensure the prefix is correct for the proxy
         iframeWindow.src = __uv$config.prefix + encodedUrl;
+
+        // Wait for the iframe to load and handle errors
+        iframeWindow.onload = function () {
+            console.log("Iframe loaded successfully.");
+        };
+
+        // Retry mechanism in case the iframe is stuck on loading
+        setTimeout(function () {
+            if (iframeWindow.src === __uv$config.prefix + encodedUrl) {
+                console.log("Iframe failed to load, retrying...");
+                iframeWindow.src = __uv$config.prefix + encodedUrl; // Retry loading the page
+            }
+        }, 5000); // Retry after 5 seconds
+
+        // Set headers to avoid 403 errors
+        iframeWindow.setAttribute('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3');
+        iframeWindow.setAttribute('Referrer', 'https://www.ecosia.org');
 
         // Show the toggle icon after the first search
         if (!hasSearched) {
-            toggleIcon.style.display = "block";
+            toggleIcon.style.display = "block"; // Show arrow after first search
             hasSearched = true;
         }
 
