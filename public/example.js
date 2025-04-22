@@ -33,7 +33,7 @@ urlInput.addEventListener("keydown", function (event) {
         let url = urlInput.value.trim();
         const searchUrl = "https://www.ecosia.org/search?method=index&q=";
 
-        // If it's not a full URL, treat it as a search query.
+        // If it's not a full URL, treat it as a search query
         if (!url.includes(".")) {
             // Encode the search query
             url = searchUrl + encodeURIComponent(url);
@@ -42,34 +42,36 @@ urlInput.addEventListener("keydown", function (event) {
             url = "https://" + url;
         }
 
-        // Log the final URL being loaded
-        console.log("Loading search URL:", url);
+        // Log the URL to check the final structure
+        console.log("Loading URL:", url);
 
-        // Encode the URL for the Ultraviolet proxy
+        // Encode the URL for Ultraviolet proxy
         const encodedUrl = __uv$config.encodeUrl(url);
 
-        // Ensure the prefix is correct for the proxy
+        // Set the iframe src with the proxy URL
         iframeWindow.src = __uv$config.prefix + encodedUrl;
 
-        // Force a refresh in case the iframe is stuck
+        // Add a timeout to check if the iframe is stuck on loading
+        setTimeout(function() {
+            if (iframeWindow.src === __uv$config.prefix + encodedUrl) {
+                console.log("Iframe failed to load, retrying...");
+                iframeWindow.src = __uv$config.prefix + encodedUrl; // Retry to load the page
+            }
+        }, 5000); // Retry after 5 seconds
+
+        // Check for iframe loading success
         iframeWindow.onload = function() {
             console.log("Iframe loaded successfully.");
         };
 
-        // Retry mechanism (if needed) to load the content
-        setTimeout(function() {
-            if (iframeWindow.src !== __uv$config.prefix + encodedUrl) {
-                console.log("Retrying to load the URL...");
-                iframeWindow.src = __uv$config.prefix + encodedUrl;
-            }
-        }, 5000); // Retry after 5 seconds if the iframe is still blank
-
+        // Show the toggle icon after the first search
         if (!hasSearched) {
-            toggleIcon.style.display = "block"; // Show arrow after first search
+            toggleIcon.style.display = "block";
             hasSearched = true;
         }
 
-        hideInput(); // Hide input after searching
+        // Hide the input after the search
+        hideInput();
     }
 });
 
