@@ -33,17 +33,21 @@ urlInput.addEventListener("keydown", function (event) {
         let url = urlInput.value.trim();
         const searchUrl = "https://www.ecosia.org/search?method=index&q=";
 
-        // Handle query without a dot in the URL (search query)
+        // If it's not a full URL, treat it as a search query.
         if (!url.includes(".")) {
+            // Encode the search query
             url = searchUrl + encodeURIComponent(url);
         } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            // Ensure URL starts with https://
+            // If it's a URL without protocol, prepend https://
             url = "https://" + url;
         }
 
+        // Log the final URL that will be loaded to the iframe
+        console.log("Loading URL:", url);
+
         // Encode the URL for the Ultraviolet proxy
         const encodedUrl = __uv$config.encodeUrl(url);
-        
+
         // Ensure the prefix is correct for the proxy
         iframeWindow.src = __uv$config.prefix + encodedUrl;
 
@@ -58,3 +62,4 @@ urlInput.addEventListener("keydown", function (event) {
 
 // Toggle input visibility when the icon is clicked
 toggleIcon.addEventListener("click", toggleInput);
+
