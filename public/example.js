@@ -33,13 +33,19 @@ urlInput.addEventListener("keydown", function (event) {
         let url = urlInput.value.trim();
         const searchUrl = "https://www.ecosia.org/search?method=index&q=";
 
+        // Handle query without a dot in the URL (search query)
         if (!url.includes(".")) {
             url = searchUrl + encodeURIComponent(url);
         } else if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            // Ensure URL starts with https://
             url = "https://" + url;
         }
 
-        iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+        // Encode the URL for the Ultraviolet proxy
+        const encodedUrl = __uv$config.encodeUrl(url);
+        
+        // Ensure the prefix is correct for the proxy
+        iframeWindow.src = __uv$config.prefix + encodedUrl;
 
         if (!hasSearched) {
             toggleIcon.style.display = "block"; // Show arrow after first search
@@ -50,4 +56,5 @@ urlInput.addEventListener("keydown", function (event) {
     }
 });
 
+// Toggle input visibility when the icon is clicked
 toggleIcon.addEventListener("click", toggleInput);
