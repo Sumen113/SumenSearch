@@ -42,14 +42,27 @@ urlInput.addEventListener("keydown", function (event) {
             url = "https://" + url;
         }
 
-        // Log the final URL that will be loaded to the iframe
-        console.log("Loading URL:", url);
+        // Log the final URL being loaded
+        console.log("Loading search URL:", url);
 
         // Encode the URL for the Ultraviolet proxy
         const encodedUrl = __uv$config.encodeUrl(url);
 
         // Ensure the prefix is correct for the proxy
         iframeWindow.src = __uv$config.prefix + encodedUrl;
+
+        // Force a refresh in case the iframe is stuck
+        iframeWindow.onload = function() {
+            console.log("Iframe loaded successfully.");
+        };
+
+        // Retry mechanism (if needed) to load the content
+        setTimeout(function() {
+            if (iframeWindow.src !== __uv$config.prefix + encodedUrl) {
+                console.log("Retrying to load the URL...");
+                iframeWindow.src = __uv$config.prefix + encodedUrl;
+            }
+        }, 5000); // Retry after 5 seconds if the iframe is still blank
 
         if (!hasSearched) {
             toggleIcon.style.display = "block"; // Show arrow after first search
@@ -62,4 +75,5 @@ urlInput.addEventListener("keydown", function (event) {
 
 // Toggle input visibility when the icon is clicked
 toggleIcon.addEventListener("click", toggleInput);
+
 
