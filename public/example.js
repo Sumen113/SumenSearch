@@ -45,28 +45,13 @@ urlInput.addEventListener("keydown", function (event) {
         // Log the URL being loaded to check if it's correct
         console.log("Loading URL:", url);
 
-        // Encode the URL for Ultraviolet proxy
-        const encodedUrl = __uv$config.encodeUrl(url);
-
-        // Ensure the prefix is correct for the proxy
-        iframeWindow.src = __uv$config.prefix + encodedUrl;
-
-        // Wait for the iframe to load and handle errors
-        iframeWindow.onload = function () {
-            console.log("Iframe loaded successfully.");
-        };
-
-        // Retry mechanism in case the iframe is stuck on loading
-        setTimeout(function () {
-            if (iframeWindow.src === __uv$config.prefix + encodedUrl) {
-                console.log("Iframe failed to load, retrying...");
-                iframeWindow.src = __uv$config.prefix + encodedUrl; // Retry loading the page
-            }
-        }, 5000); // Retry after 5 seconds
-
-        // Set headers to avoid 403 errors
-        iframeWindow.setAttribute('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3');
-        iframeWindow.setAttribute('Referrer', 'https://www.ecosia.org');
+        try {
+            // Ensure the URL is encoded before passing it to the proxy
+            const encodedUrl = __uv$config.encodeUrl(url);
+            iframeWindow.src = __uv$config.prefix + encodedUrl;
+        } catch (error) {
+            console.error("Error encoding URL:", error);
+        }
 
         // Show the toggle icon after the first search
         if (!hasSearched) {
@@ -78,6 +63,7 @@ urlInput.addEventListener("keydown", function (event) {
         hideInput();
     }
 });
+
 
 // Toggle input visibility when the icon is clicked
 toggleIcon.addEventListener("click", toggleInput);
