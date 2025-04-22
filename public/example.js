@@ -31,7 +31,7 @@ urlInput.addEventListener("keydown", function (event) {
         event.preventDefault();
 
         let url = urlInput.value.trim();
-        const searchUrl = "https://duckduckgo.com/?t=h_&q=";
+        const searchUrl = "https://www.ecosia.org/search?method=index&q=";
 
         if (!url.includes(".")) {
             url = searchUrl + encodeURIComponent(url);
