@@ -12,9 +12,10 @@
 
 .input-wrapper {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
-    transform: translateX(-50%) translateY(-200%);
+    transition: top 0.3s ease;
+    transform: translateX(-50%) translateY(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,13 +23,13 @@
 }
 
 .toggle-icon {
+    margin-top: 9vh;
+    position: absolute;
     border-radius: 1vh;
     font-size: 1.5rem;
     color: white;
     cursor: pointer;
     transition: transform 0.3s ease, margin 0.3s ease;
-    display: none;
-    margin-top: 1em;
     outline-offset: 2px;
     text-shadow:
         /* main 2px outline + half-pixel in-betweeners */
@@ -66,12 +67,17 @@
 }
 
 .toggle-icon:hover {
-    font-size: 1.7rem;
+    transform: scale(1.2);
 }
-  
+
+.toggle-icon.open:hover {
+    transform: scale(1.2) rotate(180deg);
+}
+
 .toggle-icon.open {
     transform: rotate(180deg);
 }
+
 
 .url-bar {
     position: relative;
@@ -85,14 +91,14 @@
 }
 
 .url-bar.hidden {
+    transform: translateY(-150%);
     opacity: 0;
-    transform: translateY(-20px);
     pointer-events: none;
 }
 
 /* When the URL bar is hidden, shrink the margin-top of the toggle icon */
 .url-bar.hidden + .toggle-icon {
-    margin-top: -9vh; /* Adjust this value as needed */
+    margin-top: -3vh;
 }
 
 
@@ -120,6 +126,10 @@
     box-shadow: 0 0 5px #37db47, 0 0 10px #37db47, 0 0 30px #37db47;
 }
 
+.url-bar:focus-within {
+    transform: scale(1.24);
+    box-shadow: 0 0 5px #37db47, 0 0 10px #37db47, 0 0 30px #37db47;
+}
 
 .search-icon {
     position: absolute;
@@ -132,7 +142,7 @@
 
 #urlInput:hover + .search-icon {
     color: #aac2ee;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 #urlInput:focus + .search-icon {

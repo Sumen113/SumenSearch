@@ -1,4 +1,5 @@
 const urlInput = document.getElementById("urlInput");
+const inpu = document.querySelector(".input-wrapper");
 const toggleIcon = document.querySelector(".toggle-icon");
 const urlBar = document.querySelector(".url-bar");
 const iframeWindow = document.getElementById("iframeWindow");
@@ -31,7 +32,7 @@ urlInput.addEventListener("keydown", function (event) {
         event.preventDefault();
 
         let url = urlInput.value.trim();
-        const searchUrl = "https://www.ecosia.org/search?method=index&q=";
+        const searchUrl = "https://google.com/search?method=index&q=";
 
         // If it's not a full URL, treat it as a search query.
         if (!url.includes(".")) {
@@ -55,6 +56,7 @@ urlInput.addEventListener("keydown", function (event) {
 
         // Show the toggle icon after the first search
         if (!hasSearched) {
+            inpu.style.top = "6%";
             toggleIcon.style.display = "block"; // Show arrow after first search
             hasSearched = true;
         }
