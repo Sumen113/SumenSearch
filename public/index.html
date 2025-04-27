@@ -28,4 +28,18 @@
         <iframe id="iframeWindow" class="iframeWindow"></iframe>
     </body>
     <script src="example.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+          const input = document.querySelector('input');
+      
+          if (input) {
+            input.addEventListener('focus', () => {
+              window.parent.postMessage({ event: 'iframeFocus' }, '*');
+            });
+            input.addEventListener('blur', () => {
+              window.parent.postMessage({ event: 'iframeBlur' }, '*');
+            });
+          }
+        });
+      </script>      
 </html>
