@@ -30,19 +30,24 @@
     <script src="example.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', function() {
-          const input = document.querySelector('input');
-          
-          if (input) {
-            input.addEventListener('focus', () => {
-              // Only post the message when necessary, but avoid affecting iframe elements
-              window.parent.postMessage({ event: 'iframeFocus' }, '*');
-            });
-          
-            input.addEventListener('blur', () => {
-              // Only post the message when necessary
-              window.parent.postMessage({ event: 'iframeBlur' }, '*');
-            });
-          }
+            const input = document.querySelector('input');
+            const inputWrapper = document.querySelector('.input-wrapper');
+        
+            if (input) {
+                input.addEventListener('focus', () => {
+                    window.parent.postMessage({ event: 'iframeFocus' }, '*');
+                });
+                
+                // Instead of using just blur, listen globally for clicks
+                document.addEventListener('click', (e) => {
+                    const clickedInside = inputWrapper.contains(e.target);
+        
+                    if (!clickedInside) {
+                        // Only post iframeBlur if clicked OUTSIDE the input wrapper
+                        window.parent.postMessage({ event: 'iframeBlur' }, '*');
+                    }
+                });
+            }
         });
     </script>        
 </html>
