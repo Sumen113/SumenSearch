@@ -92,7 +92,7 @@ html {
 .url-bar {
     pointer-events: auto;
     position: relative;
-    width: 55vw;
+    width: 45vw;
     display: flex;
     justify-content: center;
     align-items: center;
