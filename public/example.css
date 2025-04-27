@@ -158,21 +158,6 @@ html {
     transform: scale(1.1);
 }
 
-/* Ensure that when the input wrapper is hidden, it won't block interactions */
 .input-wrapper.hidden {
-    visibility: hidden; /* Hide the element but maintain its space in the layout */
-    pointer-events: none; /* Prevent the hidden element from interacting with clicks */
-}
-
-/* Update the .url-bar.hidden to prevent interaction */
-.url-bar.hidden {
-    transform: translateY(-150%);
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden; /* Make the URL bar completely invisible */
-}
-
-/* When the URL bar is hidden, shrink the margin-top of the toggle icon */
-.url-bar.hidden + .toggle-icon {
-    margin-top: -3vh;
+    display: none; /* Completely remove it from the layout */
 }
