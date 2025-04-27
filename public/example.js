@@ -3,6 +3,7 @@ const inpu = document.querySelector(".input-wrapper");
 const toggleIcon = document.querySelector(".toggle-icon");
 const urlBar = document.querySelector(".url-bar");
 const iframeWindow = document.getElementById("iframeWindow");
+iframeWindow.style.display = "none"; // 🚀 Hide initially
 
 let hasSearched = false;
 let inputVisible = true; // Tracks if the input is visible
@@ -50,6 +51,7 @@ urlInput.addEventListener("keydown", function (event) {
             // Ensure the URL is encoded before passing it to the proxy
             const encodedUrl = __uv$config.encodeUrl(url);
             iframeWindow.src = __uv$config.prefix + encodedUrl;
+            iframeWindow.style.display = "block"; // 🔥 Show iframe after search
         } catch (error) {
             console.error("Error encoding URL:", error);
         }
