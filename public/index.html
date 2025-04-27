@@ -30,16 +30,19 @@
     <script src="example.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', function() {
-          const input = document.querySelector('input');
-      
-          if (input) {
+            const input = document.querySelector('input');
+        
+            if (input) {
             input.addEventListener('focus', () => {
-              window.parent.postMessage({ event: 'iframeFocus' }, '*');
+                // Send focus event to parent, but only perform actions that don't interfere with iframe
+                window.parent.postMessage({ event: 'iframeFocus' }, '*');
             });
+        
             input.addEventListener('blur', () => {
-              window.parent.postMessage({ event: 'iframeBlur' }, '*');
+                // Send blur event to parent, but only perform actions that don't interfere with iframe
+                window.parent.postMessage({ event: 'iframeBlur' }, '*');
             });
-          }
+            }
         });
-      </script>      
+    </script>      
 </html>
