@@ -32,22 +32,22 @@
         window.addEventListener('DOMContentLoaded', function() {
             const input = document.querySelector('input');
             const inputWrapper = document.querySelector('.input-wrapper');
+            const iframeBackground = document.body; // The background of iframe (whole body)
         
             if (input) {
                 input.addEventListener('focus', () => {
                     window.parent.postMessage({ event: 'iframeFocus' }, '*');
                 });
                 
-                // Instead of using just blur, listen globally for clicks
                 document.addEventListener('click', (e) => {
-                    const clickedInside = inputWrapper.contains(e.target);
-        
-                    if (!clickedInside) {
-                        // Only post iframeBlur if clicked OUTSIDE the input wrapper
+                    const clickedInsideInput = inputWrapper.contains(e.target);
+                    
+                    if (!clickedInsideInput) {
+                        // If user clicks outside input-wrapper, but still inside iframe
                         window.parent.postMessage({ event: 'iframeBlur' }, '*');
                     }
                 });
             }
         });
-    </script>        
+        </script>              
 </html>
