@@ -29,9 +29,11 @@ html {
     flex-direction: column;
     align-items: center;
     z-index: 10;
+    pointer-events: none; /* Make it non-collidable */
 }
 
 .toggle-icon {
+    pointer-events: auto;
     margin-top: 9vh;
     position: absolute;
     border-radius: 1vh;
@@ -88,6 +90,7 @@ html {
 
 
 .url-bar {
+    pointer-events: auto;
     position: relative;
     width: 55vw;
     display: flex;
@@ -156,8 +159,4 @@ html {
 #urlInput:focus + .search-icon {
     color: #6495ED;
     transform: scale(1.1);
-}
-
-.input-wrapper.hidden {
-    display: none; /* Completely remove it from the layout */
 }
