@@ -7,6 +7,54 @@ iframeWindow.style.display = "none"; // 🚀 Hide initially
 
 let hasSearched = false;
 let inputVisible = true; // Tracks if the input is visible
+const submitBtn = document.querySelector(".youtube-button");
+submitBtn.addEventListener("click", () => {
+    window.open("https://inv.nadeko.net/feed/popular", "_blank");
+});
+
+const szvy = document.querySelector(".szvy-button");
+szvy.addEventListener("click", () => {
+    let win = window.open("", "_blank");
+
+    let html = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Home</title>
+            <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.ico" type="image/x-icon">
+            <style>
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                }
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }
+            </style>
+        </head>
+        <body>
+            <iframe src="https://weezer.global.ssl.fastly.net"></iframe>
+        </body>
+        </html>
+    `;
+
+    // Open the document, write HTML, and close it to render
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+
+    // Ensure the favicon loads correctly after the content
+    win.onload = () => {
+        let link = win.document.querySelector('link[rel="icon"]');
+        if (link) {
+            link.href = "https://ssl.gstatic.com/classroom/favicon.ico"; // Ensure the favicon is correctly loaded
+        }
+    };
+});
+
 
 function showInput() {
     urlBar.classList.remove("hidden");
@@ -63,57 +111,19 @@ urlInput.addEventListener("keydown", function (event) {
             hasSearched = true;
         }
 
+        // Fade and move up buttons
+        const youtubeButton = document.querySelector(".youtube-button");
+        const szvyButton = document.querySelector(".szvy-button");
+
+        youtubeButton.classList.add("fade-up");
+        szvyButton.classList.add("fade-up");
+
         // Hide the input after the search
         hideInput();
     }
 });
 
-const submitBtn = document.querySelector(".youtube-button");
-submitBtn.addEventListener("click", () => {
-    window.open("https://inv.nadeko.net/feed/popular", "_blank");
-});
-
-const szvy = document.querySelector(".szvy-button");
-szvy.addEventListener("click", () => {
-    let win = window.open("", "_blank");
-
-    let html = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Home</title>
-            <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.ico" type="image/x-icon">
-            <style>
-                html, body {
-                    margin: 0;
-                    padding: 0;
-                    height: 100%;
-                }
-                iframe {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                }
-            </style>
-        </head>
-        <body>
-            <iframe src="https://weezer.global.ssl.fastly.net"></iframe>
-        </body>
-        </html>
-    `;
-
-    // Open the document, write HTML, and close it to render
-    win.document.open();
-    win.document.write(html);
-    win.document.close();
-
-    // Ensure the favicon loads correctly after the content
-    win.onload = () => {
-        let link = win.document.querySelector('link[rel="icon"]');
-        if (link) {
-            link.href = "https://ssl.gstatic.com/classroom/favicon.ico"; // Ensure the favicon is correctly loaded
-        }
-    };
-});
+// Toggle input visibility when the toggle icon is clicked
+toggleIcon.addEventListener("click", toggleInput);
 
 

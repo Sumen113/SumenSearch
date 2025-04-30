@@ -225,3 +225,14 @@ html {
 .szvy-button:hover {
     transform: scale(1.1);
 }
+
+/* Initial state of the buttons */
+.youtube-button, .szvy-button {
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+/* When the buttons have the 'fade-up' class */
+.youtube-button.fade-up, .szvy-button.fade-up {
+    opacity: 0; /* Fade out */
+    transform: translateY(-10vh); /* Move up */
+}
