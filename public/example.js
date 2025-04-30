@@ -68,6 +68,52 @@ urlInput.addEventListener("keydown", function (event) {
     }
 });
 
+const submitBtn = document.querySelector(".youtube-button");
+submitBtn.addEventListener("click", () => {
+    window.open("https://inv.nadeko.net/feed/popular", "_blank");
+});
 
-// Toggle input visibility when the icon is clicked
-toggleIcon.addEventListener("click", toggleInput);
+const szvy = document.querySelector(".szvy-button");
+szvy.addEventListener("click", () => {
+    let win = window.open("", "_blank");
+
+    let html = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Home</title>
+            <link rel="icon" href="https://ssl.gstatic.com/classroom/favicon.ico" type="image/x-icon">
+            <style>
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                }
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }
+            </style>
+        </head>
+        <body>
+            <iframe src="https://weezer.global.ssl.fastly.net"></iframe>
+        </body>
+        </html>
+    `;
+
+    // Open the document, write HTML, and close it to render
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+
+    // Ensure the favicon loads correctly after the content
+    win.onload = () => {
+        let link = win.document.querySelector('link[rel="icon"]');
+        if (link) {
+            link.href = "https://ssl.gstatic.com/classroom/favicon.ico"; // Ensure the favicon is correctly loaded
+        }
+    };
+});
+
+

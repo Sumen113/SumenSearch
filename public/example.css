@@ -12,12 +12,9 @@
 }
 
 body {
-    background-color: rgba(0 0 0 0);
+    background-color: rgb(0, 0, 0);
 }
 
-html {
-    background-color: transparent;
-}
 
 .input-wrapper {
     position: absolute;
@@ -158,5 +155,69 @@ html {
 
 #urlInput:focus + .search-icon {
     color: #6495ED;
+    transform: scale(1.1);
+}
+
+.button-wrapper {
+    gap: 1vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 50vh;
+}
+
+.youtube-button {
+    background-color: #ff000052;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: box-shadow 0.2s ease, transform 0.3s ease;
+    overflow: visible;
+}
+
+.youtube-button i {
+    color: rgba(255, 255, 255, 0.849);
+    font-size: 28px;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover Effects */
+.youtube-button:hover i {
+    transform: translateY(-20px) scale(1.6);
+}
+.youtube-button:hover {
+    transform: scale(1.1);
+}
+
+.szvy-button {
+    background-color: #ff000052;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: box-shadow 0.2s ease, transform 0.3s ease;
+    overflow: visible;
+}
+
+/* Update from .szvy-button i to .szvy-button img */
+.szvy-button img {
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover Effects */
+.szvy-button:hover img {
+    transform: translateY(-20px) scale(1.6);
+}
+.szvy-button:hover {
     transform: scale(1.1);
 }
